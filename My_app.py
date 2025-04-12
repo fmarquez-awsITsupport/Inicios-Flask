@@ -8,14 +8,14 @@ app = Flask(__name__)
 @app.route('/index')
 def index():
     name = 'Fabio'
-    friends = ['Fabio', 'Kevin', 'Andres','Luis', 'Diegos']
-    return render_template('index.html', name=name, friends = friends )
+    friends = ['Camilo', 'Kevin', 'Andres','Luis', 'Diegos']
+    return render_template('index.html', name=name, friends=friends )
 
 
 
-@app.route('/aplication')
-@app.route('/aplication/<name>')
-@app.route('/aplication/<name>/<int:age>')#/<strin:name> es una variable y podemos definir el tipo de dato ene sta caso string
+@app.route('/My_app')
+@app.route('/My_app/<name>')
+@app.route('/My_app/<name>/<int:age>')#/<strin:name> es una variable y podemos definir el tipo de dato ene sta caso string
 def aplication(name = None, age= None): # Se asigna un valor nulo para hacer las comparaciones
     if name == None and age == None:
         return '<h1>Hola Mundo</h1>'
