@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 
-app = Flask(__name__)
+app = Flask(__name__) 
 
 
 
@@ -8,7 +8,8 @@ app = Flask(__name__)
 @app.route('/index')
 def index():
     name = 'Fabio'
-    return render_template('index.html', name=name)
+    friends = ['Fabio', 'Kevin', 'Andres','Luis', 'Diegos']
+    return render_template('index.html', name=name, friends = friends )
 
 
 

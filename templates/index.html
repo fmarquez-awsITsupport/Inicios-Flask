@@ -13,6 +13,17 @@
     <p>Hola desconocido</p>
     {% endif %}
 
+    <h2>Lista Amigos</h2>
+    <ul>
+        {% for friends in friend %}
+        <li>{{ friend }}</li>
+        {{% endfor %}}
+    </ul>
+    
+    
+    
+
+
 
 </body>
 </html>
