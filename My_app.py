@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 
 app = Flask(__name__) 
 
@@ -17,6 +17,9 @@ from datetime import datetime
 @app.route('/')
 @app.route('/index')
 def index():
+    print(url_for('index')) #Url FOR sirve para crear enlaces y rutas como accesos a traves de NAV en HTML e integracion de archivos estaticos JS, CSS, IMG
+    print(url_for('aplication', name ='Fabio', age = '25'))
+    print(url_for('code', code = 'print("Hola")'))
     name = 'Fabio'
     friends = ['Camilo', 'Kevin', 'Andres','Luis', 'Diegos']
     date = datetime.now()
@@ -33,7 +36,7 @@ def index():
 @app.route('/hello')
 @app.route('/hello/<name>')
 @app.route('/hello/<name>/<int:age>')
-@app.route('/hello/<name>/<int:age>/<email>')#/<strin:name> es una variable y podemos definir el tipo de dato ene sta caso string
+@app.route('/hello/<name>/<int:age>/<email>')#/<string:name> es una variable y podemos definir el tipo de dato ene sta caso string
 def aplication(name = None, age= None, email=None): # Se asigna un valor nulo para hacer las comparaciones
     my_data = {
         'name': name,
