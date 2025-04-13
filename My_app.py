@@ -3,7 +3,7 @@ from flask import Flask, render_template
 app = Flask(__name__) 
 
 # Filtros personalizados
-@app.add_template_filter
+@app.add_template_filter #Funcion decoradora para las plantillas
 def today(date):
     return date.strftime('%d-%m-%Y')
 
@@ -30,18 +30,20 @@ def index():
 
 
 
-@app.route('/My_app')
-@app.route('/My_app/<name>')
-@app.route('/My_app/<name>/<int:age>')#/<strin:name> es una variable y podemos definir el tipo de dato ene sta caso string
-def aplication(name = None, age= None): # Se asigna un valor nulo para hacer las comparaciones
-    if name == None and age == None:
-        return '<h1>Hola Mundo</h1>'
-    elif age == None:
-        return f'<h1>Hola, {name}</h1>'
-    else:
-        return f'<h1>Hola, {name}! y tu edad es {age * 20}</h1>'
+@app.route('/hello')
+@app.route('/hello/<name>')
+@app.route('/hello/<name>/<int:age>')
+@app.route('/hello/<name>/<int:age>/<email>')#/<strin:name> es una variable y podemos definir el tipo de dato ene sta caso string
+def aplication(name = None, age= None, email=None): # Se asigna un valor nulo para hacer las comparaciones
+    my_data = {
+        'name': name,
+        'age': age,
+        'email': email
+    }
+    return render_template('hello.html', data=my_data)
 
 from markupsafe import escape
+
 @app.route('/code/path:<code>')#Permite ejecutar codigo
 def code(code):
     return f'<code>{escape(code)}</code>'#escape - sirve para convertir codigo en texto plano por ejemplo un alert de js no se ejecutaria solo seria un texto plano
