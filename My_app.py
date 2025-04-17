@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 
 app = Flask(__name__) 
 
@@ -50,3 +50,17 @@ from markupsafe import escape
 @app.route('/code/path:<code>')#Permite ejecutar codigo
 def code(code):
     return f'<code>{escape(code)}</code>'#escape - sirve para convertir codigo en texto plano por ejemplo un alert de js no se ejecutaria solo seria un texto plano
+
+#Registrar Usuario
+@app.route('/auth/register', methods = ['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']#Captutrando el nombre de usuario
+        password = request.form['password']
+
+        if len(username) >= 4 and len(username) <= 25 and len(password) >= 6 and len(password) <=40:
+            return f"Nombre de usuario: {username}, Contraseña: {password}"
+        else:
+            error = """Nombre de usuario debe tener caracteres y la contraseña debe tener caracteres"""
+            return render_template('auth/registrer.html', error = error)
+    return render_template('auth/registrer.html')
